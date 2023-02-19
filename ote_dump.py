@@ -83,7 +83,7 @@ def dump_daily_data(session, year, month, day, url=OTE_DAILY_MARKET_URL):
 
 
 def save_df(df, fname, cur_date):
-    df.to_csv(fname, index=False)
+    df.astype({'year': 'int', 'month': 'int', 'day': 'int', 'hour': 'int'}).to_csv(fname, index=False)
     sys.stdout.write(f"Saved up to {cur_date.year:04d}-{cur_date.month:02d}-{cur_date.day:02d} ... {fname}\033[K\n")
     sys.stdout.flush()
 
