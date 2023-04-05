@@ -1,3 +1,4 @@
+#!/usr/bin/env python3
 import sys
 import numpy as np
 import requests
@@ -112,12 +113,14 @@ def dump_all_data(session, fname, start_date=None, end_date=None):
     if end_date is None:
         end_date = datetime.now() + day
 
-    cur_date = start_date
     last_saved_date = start_date
 
     complete_df = None
 
     cur_date, complete_df = load_df(fname)
+
+    if cur_date is None:
+        cur_date = start_date
 
     while cur_date < end_date:
         sys.stdout.write("Downloading ... {y:04d}-{m:02d}-{d:02d}\033[K\r".format(y=cur_date.year, m=cur_date.month, d=cur_date.day))
